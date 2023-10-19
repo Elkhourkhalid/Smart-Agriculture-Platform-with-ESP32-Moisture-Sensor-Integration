@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css?family=Exo:400,700');
+
+/* StyleCss.css */
+body {
+    margin: 2;
+    padding: 0;
+    background-image: url("page-1.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    
+}
+
+.text1 {
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+    
+}
+#index2{
+    text-align: right;
+}
+.text2{
+    font-weight: bold;
+    color: white;
+    font-size: 30px;
+     
+}
+
+
+.text3{
+    color: white;
+}
+
+
+
+body.page2 {
+    margin: 2;
+    padding: 0;
+    background-image: url("page-2.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    
+}
+
+
+
+body.page3 {
+    margin: 2;
+    padding: 0;
+    background-image: url("page-2.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    
+}
+
+body.page3 {
+    margin: 2;
+    padding: 0;
+    background-image: url("page-3.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    
+}
+
+
+
+:root {
+    --accent: #032722;
+    --border-width: 2px; /* Réduire l'épaisseur de la bordure */
+    --border-radius: 10px; /* Réduire le rayon de la bordure */
+    --font-size: 20px; /* Réduire la taille de la police */
+  }
+
+
+  .container {
+    perspective: 800px;
+  }
+
+  .toggle {
+    position: relative;
+    border: solid var(--border-width) var(--accent);
+    border-radius: var(--border-radius);
+    transition: transform cubic-bezier(0, 0, 0.30, 2) .4s;
+    transform-style: preserve-3d;
+    perspective: 800px;
+    pointer-events: none; /* Rend l'élément non cliquable */
+  }
+
+  .toggle>input[type="radio"] {
+    display: none;
+  }
+
+  .toggle>#choice1:checked~#flap {
+    transform: rotateY(-180deg);
+  }
+
+  .toggle>#choice1:checked~#flap>.content {
+    transform: rotateY(-180deg);
+  }
+
+  .toggle>#choice2:checked~#flap {
+    transform: rotateY(0deg);
+  }
+
+  .toggle>label {
+    display: inline-block;
+    min-width: 105px; /* Ajuster la largeur minimale */
+    padding: 10px; /* Ajuster le rembourrage */
+    font-size: var(--font-size);
+    text-align: center;
+    color: var(--accent);
+    cursor: default; /* Curseur par défaut, non cliquable */
+  }
+
+  .toggle>label,
+  .toggle>#flap {
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+
+  .toggle>#flap {
+    position: absolute;
+    top: calc( 0px - var(--border-width));
+    left: 50%;
+    height: calc(100% + var(--border-width) * 2);
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--font-size);
+    background-color: var(--accent);
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    transform-style: preserve-3d;
+    transform-origin: left;
+    transition: transform cubic-bezier(0.4, 0, 0.2, 1) .5s;
+  }
+
+  .toggle>#flap>.content {
+    color: #d9e3e4;
+    transition: transform 0s linear .25s;
+    transform-style: preserve-3d;
+  }
+
+  .mode-toggle-label {
+    display: inline-block;
+    margin-bottom: 0;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+    color: var(--accent);
+    cursor: pointer;
+  }
+
+  .mode-toggle-input {
+    display: none;
+  }
+
+  .mode-toggle-input+label {
+    border: solid 2px var(--accent);
+    border-radius: 10px;
+  }
+
+  .mode-toggle-input:checked+label {
+    background-color: var(--accent);
+    color: #eef1f3;
+  }
+
+ 

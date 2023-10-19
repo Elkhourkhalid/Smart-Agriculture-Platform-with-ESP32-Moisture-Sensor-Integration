@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monitoring System </title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="StyleCss.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+        :root {
+      --color-primary: #616e5f;
+      --border-width-primary: 2px;
+      --border-radius-primary: 10px;
+      --font-size-primary: 20px;
+    }
+    
+    .container-toggle-primary {
+      perspective: 800px;
+    }
+
+    .toggle-primary {
+      position: relative;
+      border: solid var(--border-width-primary) var(--color-primary);
+      border-radius: var(--border-radius-primary);
+      transition: transform cubic-bezier(0, 0, 0.30, 2) .4s;
+      transform-style: preserve-3d;
+      perspective: 800px;
+    }
+
+    .toggle-primary>input[type="radio"] {
+      display: none;
+    }
+
+    .toggle-primary>#choice-on:checked~#flap-primary {
+      transform: rotateY(-180deg);
+    }
+
+    .toggle-primary>#choice-on:checked~#flap-primary>.content-primary {
+      transform: rotateY(-180deg);
+    }
+
+    .toggle-primary>#choice-off:checked~#flap-primary {
+      transform: rotateY(0deg);
+    }
+
+    .toggle-primary>label {
+      display: inline-block;
+      min-width: 130px;
+      padding: 10px;
+      font-size: var(--font-size-primary);
+      text-align: center;
+      color: var(--color-primary);
+      cursor: pointer;
+    }
+
+    .toggle-primary>label,
+    .toggle-primary>#flap-primary {
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+
+    .toggle-primary>#flap-primary {
+      position: absolute;
+      top: calc(0px - var(--border-width-primary));
+      left: 50%;
+      height: calc(100% + var(--border-width-primary) * 2);
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: var(--font-size-primary);
+      background-color: var(--color-primary);
+      border-top-right-radius: var(--border-radius-primary);
+      border-bottom-right-radius: var(--border-radius-primary);
+      transform-style: preserve-3d;
+      transform-origin: left;
+      transition: transform cubic-bezier(0.4, 0, 0.2, 1) .5s;
+    }
+
+    .toggle-primary>#flap-primary>.content-primary {
+      color: #333;
+      transition: transform 0s linear .25s;
+      transform-style: preserve-3d;
+    }
+  </style>
+</head>
+
+<body class="page3">
+  <div class="container">
+    <div class="row justify-content-md-center my-4">
+      <div class="col-3"></div>
+      <div class="col-2"><a href="page1.html" class="text1">Contact Us</a></div>
+      <div class="col-2"><a href="page2.html" class="text1">About Us</a></div>
+      <div class="col-2"><a href="page3.html" class="text1">Informations</a></div>
+      <div class="col-2"><a href="index.html" class="text1">Home</a></div>
+      <div class="col-1"></div>
+    </div>
+  </div>
+
+
+  <!--------- ------------------------------------------------------- -->
+  <div class="container">
+    <div class="row justify-content-md-center my-4">
+        <div class="col-md-7 bg-muted shadow-lg border border-muted glow border-3 shadow-3" id="leftdiv">
+            <!-- Your content goes here -->
+          <div class="row justify-content-md-center my-4">
+            <div class="col-3"></div>
+            <div class="col-6"><div id="humidityChartContainer"></div></div>
+            <div class="col-3"></div>
+          </div>
+          <br>
+          <br>
+          <div class="row justify-content-md-center my-4">
+            <div class="col-3"></div>
+            
+            <div class="col-3 bg-secondary rounded" style="display: flex; align-items: center; justify-content: center;">
+              <div id="flap-primary">
+                <span class="content-primary font-weight-bold">Pump state</span>
+                <span></span>
+                <span class="content-primary font-weight-bold" id="pumpstate"></span>
+              </div>
+            </div>
+            
+            <div class="col-3">
+              <input type="checkbox" id="modeToggle" class="mode-toggle-input" onchange="toggleMode()">
+              <label for="modeToggle" class="mode-toggle-label"> Automatic mode</label>
+            </div>
+            <div class="col-3"></div>
+          </div>
+          <div class="row justify-content-md-center my-4">
+            <div class="col-3"></div>
+            <div class="col-6">
+              <form class="toggle-primary" id="toggleForm-primary">
+                <input type="radio" id="choice-on" name="toggleChoice" value="1" checked>
+                <label for="choice-on">ON</label>
+    
+                <input type="radio" id="choice-off" name="toggleChoice" value="0" checked>
+                <label for="choice-off">OFF</label>
+                <div id="flap-primary"><span class="content-primary" id="toggleState-primary">Pump</span></div>
+              </form>
+            </div>
+            <div class="col-3"></div>
+          </div>
+
+
+    
+
+        </div>
+
+        <div class="col-md-2"></div>
+        <div class="col-md-3 rounded bg-light shadow-lg p-4 border border-primary border-3">
+          <div class="bg-primary text-white text-center p-2 rounded" id="system1">
+            Home
+          </div>
+          <div class="bg-primary text-white text-center p-2 rounded mt-3" id="system2">
+            Monitoring System
+          </div>
+          <div class="bg-success text-white text-center p-2 rounded mt-3" id="sensorInfo">
+            Sensor Informations
+          </div>
+          <div class="bg-primary text-white text-center p-2 rounded mt-3" id="instructions">
+            Directions
+          </div>
+            <div class="bg-primary text-white text-center p-2 rounded mt-3" id="welcome">
+                Welcome
+                <br>
+            <div id="usernameDisplay"></div>
+            </div>
+            <br>
+            <br>
+            
+            <div class="bg-primary text-white text-center p-2 rounded mt-3">
+
+              <div class="row justify-content-md-center my-4">
+                  <div class="col-4">
+                      <div id="settings">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                              <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                              <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                          </svg>
+                      </div>
+                  </div>
+                  <div class="col-2"></div>
+                  <div class="col-4">
+                      <div id="index">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                              <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                              <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                          </svg>
+                      </div>
+                  </div>
+              </div>
+              
+          </div>
+        </div>
+    </div>
+</div>
+
+
+<!--------- ------------------------------------------------------- -->
+  
+  <!-- the scripts for products you want to access must be added-->
+  <script type="text/javascript" src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+  <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+  <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+ 
+  <script type="module">
+
+  
+
+const username = localStorage.getItem('user');
+document.getElementById('usernameDisplay').textContent = '' +username ;
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCHdvlQgl7FQFj-DTC31uWlv8j6wN_NC68",
+      authDomain: "esp32-irrigation-system.firebaseapp.com",
+      databaseURL: "https://esp32-irrigation-system-default-rtdb.firebaseio.com",
+      projectId: "esp32-irrigation-system",
+      storageBucket: "esp32-irrigation-system.appspot.com",
+      messagingSenderId: "609954781830",
+      appId: "1:609954781830:web:43efaf351ac1a3d0934f07"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // getting reference to the database
+    var database = firebase.database();
+    // getting reference to the data we want
+    var dataRef1 = database.ref('user/'+username+'/humidity');
+    var dataRef2 = database.ref('user/'+username+'/pumpstate');
+
+
+
+  dataRef2.on('value', function(getdata1) {
+  var pumpSt = getdata1.val();
+  
+  // Sélectionnez l'élément avec l'ID "pumpstate" sur la page
+  var pumpStateElement = document.getElementById('pumpstate');
+ 
+  // Mettez à jour le contenu en fonction de la valeur de pumpSt
+  pumpStateElement.textContent = pumpSt === '1' ? 'ON ' : 'OFF';
+});
+
+
+    dataRef1.on('value', function (getdata1) {
+      var humi = getdata1.val();
+
+// Use FusionCharts to create the gauge chart
+      FusionCharts.ready(function () {
+        var humiChart = new FusionCharts({
+          type: 'angulargauge',
+          renderAt: "humidityChartContainer",
+          width: '300',
+          height: '200',
+          dataFormat: 'json',
+          dataSource: {
+            "chart": {
+// Chart configurations
+              "caption": "Humidity level",
+              "lowerLimit": "0",
+              "upperLimit": "100",
+              "showValue": "1",
+              "theme": "fusion"
+            },
+            "colorRange": {
+// Set colors for different humidity ranges
+              "color": [{
+                "minValue": "0",
+                "maxValue": "30",
+                "code": "#F2726F"
+              }, {
+                "minValue": "30",
+                "maxValue": "70",
+                "code": "#FFC533"
+              }, {
+                "minValue": "70",
+                "maxValue": "100",
+                "code": "#62B58F"
+              }]
+            },
+            "dials": {
+              "dial": [{
+                "value": humi // The current humidity value
+              }]
+            }
+          }
+        }).render();
+      });
+    })
+
+  function toggleMode() {
+// Get the current state of the toggle button
+    var modeToggle = document.getElementById('modeToggle');
+    var modeValue = modeToggle.checked ? 1 : 0;
+
+    var modeRef = database.ref('user/'+username+'/mode');
+    modeRef.set(modeValue);
+}
+
+// Add an event listener to detect changes in the checkbox
+var modeToggle = document.getElementById('modeToggle');
+modeToggle.addEventListener('change', toggleMode);
+
+var formPrimary = document.getElementById('toggleForm-primary');
+    //var toggleStateLabelPrimary = document.getElementById('toggleState-primary');
+
+    formPrimary.addEventListener('change', function (event) {
+      var toggleValue = event.target.value;
+
+      var toggleRef = database.ref('user/'+username+'/pumpswitch');
+      toggleRef.set(toggleValue);
+    });
+
+  </script>
+  <script type="text/javascript" src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+   <script>
+    // JavaScript for navigation
+    document.getElementById('system1').addEventListener('click', function () {
+        window.location.href = 'index.html';
+    });
+
+    document.getElementById('system2').addEventListener('click', function () {
+        window.location.href = 'dashboard2.html';
+    });
+
+    document.getElementById('sensorInfo').addEventListener('click', function () {
+        window.location.href = 'SensorInformation.html';
+    });
+
+    document.getElementById('instructions').addEventListener('click', function () {
+        window.location.href = 'directions.html';
+    });
+
+    document.getElementById('index').addEventListener('click', function () {
+            window.location.href = 'index.html';
+    });
+
+    document.getElementById('settings').addEventListener('click', function () {
+            window.location.href = 'settings.html';
+    });
+</script>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>
